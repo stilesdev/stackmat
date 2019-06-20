@@ -28,20 +28,18 @@ export class SignalDecoder {
     }
 
     public decode(data: Float32Array) {
+        // Not using data.map() here because Float32Array.map always returns a Float32Array
         let bits: Bit[] = []
-        data.forEach((value) => {
-            const bit = floatSignalToBinary(value)
-            if (bit !== undefined) {
-                bits.push(bit)
-            }
-        })
+        for (const signal of data) {
+            bits.push(signal <= 0 ? 1 : 0)
+        }
 
         const startIndex = this.findBeginningOfSignal(bits)
-
         const runLengthEncoded: RunLength[] = runLengthEncode(bits.slice(startIndex))
-        bits = getBitsFromRunLengthEncodedSignal(runLengthEncoded, this.ticksPerBit)
+        bits = this.getBitsFromRunLengthEncodedSignal(runLengthEncoded)
         const packet = getPacket(bits.slice(1))
-        if (packet) {
+
+        if (packet.isValid) {
             this.callback(packet)
         }
     }
@@ -50,95 +48,68 @@ export class SignalDecoder {
         let oneCount = 0
         let waitingForZero = false
 
-        let i = 0
-        while (i < data.length) {
-            const bit = data[i]
-            if (bit === 1) {
-                oneCount += 1
-            }
-            if (oneCount > (9 * this.ticksPerBit)) {  // there's no byte in a package which contains 8 bits of 1
-                // that translates to 9 * ticksPerBit
-                waitingForZero = true
-            }
-            if (bit === 0) {
+        for (let i = 0; i < data.length; i++) {
+            if (data[i] === 1) {
+                oneCount++
+
+                if (oneCount > (9 * this.ticksPerBit)) {
+                    // there's no byte in a package which contains 8 bits of 1
+                    // that translates to 9 * ticksPerBit
+                    waitingForZero = true
+                }
+            } else {
                 oneCount = 0
                 if (waitingForZero) {
                     return i
                 }
             }
-            i += 1
         }
 
         return undefined
     }
-}
 
-function floatSignalToBinary(signal: number): Bit | undefined {
-    if (signal < 0) {
-        return 1
+    private getBitsFromRunLengthEncodedSignal(array: RunLength[]): Bit[] {
+        const x = array.map((e) => Array(Math.round(e.length / this.ticksPerBit)).fill(e.bit))
+        return ([] as Bit[]).concat(...x)
     }
-    if (signal > 0) {
-        return 0
-    }
-    return undefined
 }
 
 function runLengthEncode(data: Bit[]): RunLength[] {
     let lastBit = -1
     const result: RunLength[] = []
 
-    let i = 0
-    while (i < data.length) {
-        if (lastBit !== data[i]) {
-            result.push({bit: data[i], length: 1})
-            lastBit = data[i]
+    for (const bit of data) {
+        if (lastBit !== bit) {
+            result.push({bit, length: 1})
+            lastBit = bit
         } else {
-            result[result.length - 1].length += 1
+            result[result.length - 1].length++
         }
-        i += 1
     }
 
     return result
 }
 
-function getBitsFromRunLengthEncodedSignal(array: RunLength[], period: number): Bit[] {
-    let bitsCount: number
-    const x = (Array.from(array).map((e) => (
-        (bitsCount = Math.round(e.length / period)),
-            (getRange(1, bitsCount).map(() => e.bit))
-    )))
-    return ([] as Bit[]).concat(...(x || []))
-}
+function getPacket(data: Bit[]): Packet {
+    const tmp: number[] = []
+    for (let i = 0; i <= 9; i++) {
+        tmp.push(decodeBits(data, i * 10))
+    }
 
-function getPacket(data: Bit[]) {
-    const tmp = getRange(0, 9).map((i) => decodeBits(data, i * 10))
-    let packet: Packet
-
-    packet = new PacketGen4(tmp)
+    let packet: Packet = new PacketGen4(tmp)
     if (packet.isValid) {
         return packet
     } else {
         packet = new PacketGen3(tmp.slice(0, -1))
-        return packet.isValid ? packet : undefined
+        return packet
     }
 }
 
-function decodeBits(data: Bit[], offset: number) {
+function decodeBits(data: Bit[], offset: number): number {
     let result = 0
-    let i = 0
-    while (i < 8) {
+    for (let i = 0; i < 8; i++) {
         // tslint:disable-next-line:no-bitwise
         result += data[offset + i] << i
-        i += 1
     }
     return result
-}
-
-function getRange(start: number, end: number) {
-    const range = []
-    const ascending = start < end
-    for (let i = start; ascending ? i <= end : i >= end; ascending ? i++ : i--) {
-        range.push(i)
-    }
-    return range
 }
