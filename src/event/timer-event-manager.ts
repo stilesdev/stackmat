@@ -81,7 +81,19 @@ export class TimerEventManager {
             if (this.lastPacketRunning && (packet.status === PacketStatus.STOPPED || packet.status === PacketStatus.BOTH_HANDS || (this.lastPacket.timeInMilliseconds === packet.timeInMilliseconds && packet.timeInMilliseconds > 0))) {
                 this.lastPacketRunning = false
                 this.lastPacketReset = false
+                if (!this.lastPacket.isLeftHandDown && !packet.isLeftHandDown) {
+                    this.fire('leftHandDown', packet)
+                }
+                if (!this.lastPacket.isRightHandDown && !packet.isRightHandDown) {
+                    this.fire('rightHandDown', packet)
+                }
                 this.fire('stopped', packet)
+                if (!this.lastPacket.isLeftHandDown && !packet.isLeftHandDown) {
+                    this.fire('leftHandUp', packet)
+                }
+                if (!this.lastPacket.isRightHandDown && !packet.isRightHandDown) {
+                    this.fire('rightHandUp', packet)
+                }
             }
 
             if (!this.lastPacketReset && packet.status === PacketStatus.IDLE) {
