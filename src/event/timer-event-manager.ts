@@ -60,21 +60,25 @@ export class TimerEventManager {
                 this.fire('rightHandDown', packet)
             }
 
-            if (!this.lastPacket.areBothHandsDown && packet.areBothHandsDown && this.lastPacket.timeInMilliseconds === 0) {
-                this.fire('starting', packet)
-            }
-
-            if (this.lastPacket.status === PacketStatus.BOTH_HANDS && packet.status === PacketStatus.READY) {
+            if (!this.lastPacket.areBothHandsDown && packet.status === PacketStatus.BOTH_HANDS && this.lastPacket.timeInMilliseconds === 0) {
                 this.fire('ready', packet)
             }
 
-            if (!this.lastPacketRunning && packet.status === PacketStatus.RUNNING) {
+            if (this.lastPacket.status === PacketStatus.BOTH_HANDS && !packet.areBothHandsDown && packet.status !== PacketStatus.RUNNING && packet.timeInMilliseconds === 0) {
+                this.fire('unready', packet)
+            }
+
+            if (this.lastPacket.status === PacketStatus.BOTH_HANDS && packet.status === PacketStatus.STARTING) {
+                this.fire('starting', packet)
+            }
+
+            if (!this.lastPacketRunning && (packet.status === PacketStatus.RUNNING || (this.lastPacket.timeInMilliseconds === 0 && packet.timeInMilliseconds > 0))) {
                 this.lastPacketRunning = true
                 this.lastPacketReset = false
                 this.fire('started', packet)
             }
 
-            if (this.lastPacketRunning && (packet.status === PacketStatus.STOPPED || packet.status === PacketStatus.BOTH_HANDS)) {
+            if (this.lastPacketRunning && (packet.status === PacketStatus.STOPPED || packet.status === PacketStatus.BOTH_HANDS || (this.lastPacket.timeInMilliseconds === packet.timeInMilliseconds && packet.timeInMilliseconds > 0))) {
                 this.lastPacketRunning = false
                 this.lastPacketReset = false
                 this.fire('stopped', packet)

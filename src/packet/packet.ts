@@ -1,11 +1,11 @@
 export enum PacketStatus {
     IDLE = 'I',
+    STARTING = 'A',
+    RUNNING = ' ',
+    STOPPED = 'S',
     LEFT_HAND = 'L',
     RIGHT_HAND = 'R',
     BOTH_HANDS = 'C',
-    READY = 'A',
-    RUNNING = ' ',
-    STOPPED = 'S',
     INVALID = 'X',
 }
 
@@ -52,14 +52,14 @@ export abstract class PacketAbstract implements Packet {
     }
 
     get isLeftHandDown(): boolean {
-        return this.status === PacketStatus.LEFT_HAND || this.status === PacketStatus.BOTH_HANDS || this.status === PacketStatus.READY
+        return this.status === PacketStatus.LEFT_HAND || this.status === PacketStatus.BOTH_HANDS || this.status === PacketStatus.STARTING
     }
 
     get isRightHandDown(): boolean {
-        return this.status === PacketStatus.RIGHT_HAND || this.status === PacketStatus.BOTH_HANDS || this.status === PacketStatus.READY
+        return this.status === PacketStatus.RIGHT_HAND || this.status === PacketStatus.BOTH_HANDS || this.status === PacketStatus.STARTING
     }
 
     get areBothHandsDown(): boolean {
-        return this.status === PacketStatus.BOTH_HANDS || this.status === PacketStatus.READY
+        return this.status === PacketStatus.BOTH_HANDS || this.status === PacketStatus.STARTING
     }
 }
