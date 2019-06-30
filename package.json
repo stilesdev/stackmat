@@ -2,24 +2,31 @@
   "name": "stackmat",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index",
+  "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "browser": "dist/stackmat.js",
+  "unpkg": "dist/stackmat.min.js",
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
-    "build": "npm run build:ts && npm run build:umd",
+    "build": "npm run build:ts && npm run build:umd && npm run build:umd:min",
     "build:ts": "tsc",
-    "build:umd": "rollup dist/index.js --format umd --name Stackmat --file dist/index.mjs",
+    "build:umd": "rollup -c",
+    "build:umd:min": "rollup -c --environment BUILD:minify",
     "lint": "tslint -p tsconfig.json",
     "watch": "concurrently npm:watch:ts npm:watch:umd",
     "watch:ts": "tsc --watch",
-    "watch:umd": "wait-on dist/index.js && rollup dist/index.js --format umd --name Stackmat --file dist/index.mjs --watch"
+    "watch:umd": "rollup -c --watch"
   },
   "author": "Matthew Stiles",
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^4.1.0",
     "rollup": "^1.15.6",
+    "rollup-plugin-terser": "^5.0.0",
+    "rollup-plugin-typescript": "^1.0.1",
     "tslint": "^5.17.0",
-    "typescript": "^3.5.2",
-    "wait-on": "^3.2.0"
+    "typescript": "^3.5.2"
   }
 }
