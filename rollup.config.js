@@ -4,7 +4,7 @@ import { terser } from 'rollup-plugin-terser'
 const config = {
     input: 'src/index.ts',
     output: {
-        file: 'dist/stackmat.js',
+        file: 'dist/umd/stackmat.js',
         format: 'umd',
         name: 'Stackmat'
     },
@@ -16,7 +16,7 @@ const config = {
 }
 
 if (process.env.BUILD === 'minify') {
-    config.output.file = 'dist/stackmat.min.js'
+    config.output.file = 'dist/umd/stackmat.min.js'
     config.plugins.push(terser())
 }
 

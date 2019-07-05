@@ -2,10 +2,10 @@
   "name": "stackmat",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "browser": "dist/stackmat.js",
-  "unpkg": "dist/stackmat.min.js",
+  "main": "dist/module/index.js",
+  "types": "dist/module/index.d.ts",
+  "browser": "dist/umd/stackmat.js",
+  "unpkg": "dist/umd/stackmat.min.js",
   "files": [
     "dist/**/*"
   ],
@@ -15,6 +15,7 @@
     "build:umd": "rollup -c",
     "build:umd:min": "rollup -c --environment BUILD:minify",
     "lint": "tslint -p tsconfig.json",
+    "prepack": "npm run build",
     "watch": "concurrently npm:watch:ts npm:watch:umd",
     "watch:ts": "tsc --watch",
     "watch:umd": "rollup -c --watch"
