@@ -10,7 +10,6 @@ const types = stringEventType([
     'ready',
     'unready',
     'starting',
-    'started',
     'leftHandDown',
     'leftHandUp',
     'rightHandDown',
