@@ -1,14 +1,25 @@
 {
   "name": "stackmat",
   "version": "1.0.0",
-  "description": "",
+  "description": "Subscribe to events received from a Stackmat timer connected to the browser via the HTML5 Audio API.",
+  "keywords": [
+    "Stackmat",
+    "Rubik's Cube"
+  ],
+  "homepage": "https://github.com/mstiles92/stackmat",
+  "bugs": "https://github.com/mstiles92/stackmat/issues",
+  "license": "MIT",
+  "author": {
+    "name": "Matthew Stiles",
+    "url": "https://github.com/mstiles92"
+  },
+  "files": [
+    "dist/**/*"
+  ],
   "main": "dist/module/index.js",
   "types": "dist/module/index.d.ts",
   "browser": "dist/umd/stackmat.js",
   "unpkg": "dist/umd/stackmat.min.js",
-  "files": [
-    "dist/**/*"
-  ],
   "scripts": {
     "build": "npm run build:ts && npm run build:umd && npm run build:umd:min",
     "build:ts": "tsc",
@@ -20,8 +31,6 @@
     "watch:ts": "tsc --watch",
     "watch:umd": "rollup -c --watch"
   },
-  "author": "Matthew Stiles",
-  "license": "MIT",
   "devDependencies": {
     "concurrently": "^4.1.2",
     "rollup": "^1.20.3",
