@@ -2,7 +2,7 @@ import typescript from 'rollup-plugin-typescript'
 import { terser } from 'rollup-plugin-terser'
 
 const config = {
-    input: 'src/index.ts',
+    input: 'src/stackmat.ts',
     output: {
         file: 'dist/umd/stackmat.js',
         format: 'umd',
