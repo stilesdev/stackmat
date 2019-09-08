@@ -16,10 +16,8 @@ jobs:
         with:
           node-version: 10.x
           registry-url: https://registry.npmjs.org/
-      - name: Install and Build
-        run: |
-          npm ci
-          npm run build
+      - name: NPM Install
+        run: npm ci
         env:
           CI: true
       - name: NPM Publish
