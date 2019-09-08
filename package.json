@@ -23,11 +23,11 @@
   "author": "Matthew Stiles",
   "license": "MIT",
   "devDependencies": {
-    "concurrently": "^4.1.1",
-    "rollup": "^1.16.3",
-    "rollup-plugin-terser": "^5.0.0",
+    "concurrently": "^4.1.2",
+    "rollup": "^1.20.3",
+    "rollup-plugin-terser": "^5.1.1",
     "rollup-plugin-typescript": "^1.0.1",
-    "tslint": "^5.18.0",
-    "typescript": "^3.5.2"
+    "tslint": "^5.19.0",
+    "typescript": "^3.6.2"
   }
 }
