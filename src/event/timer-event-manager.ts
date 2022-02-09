@@ -10,13 +10,12 @@ export class TimerEventManager {
     private lastPacketReset: boolean = false
     private handlers: Map<TimerEvent, TimerEventHandler[]> = new Map()
 
-    private connectionTimer: Timeout
     private connected: boolean = false
     private lastPacketReceived: number = 0
     private connectionTimout: number = 1000
 
     constructor() {
-        this.connectionTimer = setInterval(() => {
+        setInterval(() => {
             if (this.connected && this.lastPacketReceived + this.connectionTimout < Date.now()) {
                 this.connected = false
                 this.fire('timerDisconnected')
