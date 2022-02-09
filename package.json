@@ -6,12 +6,12 @@
     "Stackmat",
     "Rubik's Cube"
   ],
-  "homepage": "https://github.com/mstiles92/stackmat",
-  "bugs": "https://github.com/mstiles92/stackmat/issues",
+  "homepage": "https://github.com/stilesdev/stackmat",
+  "bugs": "https://github.com/stilesdev/stackmat/issues",
   "license": "MIT",
   "author": {
     "name": "Matthew Stiles",
-    "url": "https://github.com/mstiles92"
+    "url": "https://github.com/stilesdev"
   },
   "files": [
     "dist/**/*"
