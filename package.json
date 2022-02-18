@@ -16,9 +16,8 @@
   "files": [
     "dist/**/*"
   ],
-  "main": "dist/module/index.js",
+  "browser": "dist/module/index.js",
   "types": "dist/module/index.d.ts",
-  "browser": "dist/umd/stackmat.js",
   "unpkg": "dist/umd/stackmat.min.js",
   "scripts": {
     "build": "npm run build:ts && npm run build:umd && npm run build:umd:min",
