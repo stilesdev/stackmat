@@ -31,12 +31,8 @@ module.exports = {
             { registeredComponentsOnly: false },
         ],
         'vue/html-indent': ['error', 4],
-        'vue/max-attributes-per-line': [
-            'error',
-            { singleline: 1, multiline: 1 },
-        ],
         'vue/no-v-for-template-key': 'off',
         'vue/no-v-model-argument': 'off',
-        'vue/script-indent': ['error', 4],
+        'vue/script-indent': ['error', 4, { switchCase: 1 }],
     },
 }

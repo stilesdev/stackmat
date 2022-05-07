@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@picocss/pico": "^1.5.0",
+    "stackmat": "^1.1.0",
     "vue": "^3.2.33"
   },
   "devDependencies": {
