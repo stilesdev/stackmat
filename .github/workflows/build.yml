@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - "*"
+    paths-ignore:
+      - "demo/*"
+      - "example/*"
 
 jobs:
   build:
