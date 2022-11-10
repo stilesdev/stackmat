@@ -5,8 +5,8 @@ on:
     branches:
       - "*"
     paths-ignore:
-      - "demo/*"
-      - "example/*"
+      - "demo/**"
+      - "example/**"
 
 jobs:
   build:
