@@ -3,6 +3,7 @@ import '@picocss/pico'
 import TheHeader from './components/TheHeader.vue'
 import ButtonTheme from './components/ButtonTheme.vue'
 import ButtonStartStop from './components/ButtonStartStop.vue'
+import TimerTile from './components/TimerTile.vue'
 import EventTile from './components/EventTile.vue'
 </script>
 
@@ -11,6 +12,8 @@ import EventTile from './components/EventTile.vue'
         <TheHeader />
 
         <ButtonStartStop />
+
+        <TimerTile />
 
         <article>
             <header>Timer Events</header>
