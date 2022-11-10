@@ -2,7 +2,7 @@
 import type { TimerEvent } from 'stackmat'
 import { ref, onUnmounted } from 'vue'
 import { useStackmat } from '@/composables/useStackmat'
-import { computed } from '@vue/reactivity'
+import { computed } from 'vue'
 
 const props = defineProps<{
     timerEvent: TimerEvent
