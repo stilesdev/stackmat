@@ -18,6 +18,21 @@ import IconNpm from './icons/IconNpm.vue'
         </ul>
     </nav>
     <section>
-        <p>Description here</p>
+        <p>
+            Connect your timer to the microphone port on your computer and click the large blue
+            button to start listening for events. Only tested with the SpeedStacks G4 timer, but the
+            SpeedStacks G3 should also be compatible. Other timers may or may not work.
+        </p>
+        <p>Hover over each event for a short description of when it is fired.</p>
     </section>
 </template>
+
+<style scoped>
+li > strong {
+    font-size: 1.5em;
+}
+
+p {
+    font-size: 0.8em;
+}
+</style>

@@ -71,5 +71,6 @@ onUnmounted(() => {
 <style scoped>
 button {
     cursor: default;
+    font-size: smaller;
 }
 </style>
