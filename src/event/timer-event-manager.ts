@@ -1,4 +1,3 @@
-import Timeout = NodeJS.Timeout
 import { Packet, PacketStatus } from '../packet/packet'
 import { isEvent, TimerEvent } from './timer-event'
 

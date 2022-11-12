@@ -1,4 +1,4 @@
-import typescript from 'rollup-plugin-typescript'
+import typescript from '@rollup/plugin-typescript'
 import terser from '@rollup/plugin-terser'
 
 const config = {
@@ -9,9 +9,7 @@ const config = {
         name: 'Stackmat'
     },
     plugins: [
-        typescript({
-            typescript: require('typescript')
-        })
+        typescript()
     ]
 }
 

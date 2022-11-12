@@ -32,9 +32,9 @@
   },
   "devDependencies": {
     "@rollup/plugin-terser": "^0.1.0",
+    "@rollup/plugin-typescript": "^9.0.2",
     "concurrently": "^7.0.0",
     "rollup": "^2.67.1",
-    "rollup-plugin-typescript": "^1.0.1",
     "tslint": "^6.1.3",
     "typescript": "^4.5.5"
   }
