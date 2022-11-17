@@ -1,6 +1,6 @@
 {
   "name": "stackmat",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Subscribe to events received from a Stackmat timer connected to the browser via the HTML5 Audio API.",
   "keywords": [
     "Stackmat",
