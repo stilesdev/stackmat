@@ -18,4 +18,4 @@ const types = stringEventType([
 
 export type TimerEvent = (typeof types)[number]
 
-export const isEvent = (x: any): x is TimerEvent => types.includes(x)
+export const isEvent = (x: unknown): x is TimerEvent => typeof x === 'string' && types.includes(x as TimerEvent)

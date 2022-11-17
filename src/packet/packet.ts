@@ -63,3 +63,9 @@ export abstract class PacketAbstract implements Packet {
         return this.status === PacketStatus.BOTH_HANDS || this.status === PacketStatus.STARTING
     }
 }
+
+export class PacketInvalid extends PacketAbstract {
+    constructor() { 
+        super(false)
+    }
+}

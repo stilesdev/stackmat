@@ -1,26 +1,26 @@
-import { Packet, PacketStatus } from '../packet/packet'
+import { Packet, PacketInvalid, PacketStatus } from '../packet/packet'
 import { isEvent, TimerEvent } from './timer-event'
 
-export type TimerEventHandler = (lastPacket: Packet) => any
+export type TimerEventHandler = (lastPacket: Packet) => void
 
 export class TimerEventManager {
     private lastPacket?: Packet
-    private lastPacketRunning: boolean = false
-    private lastPacketReset: boolean = false
+    private lastPacketRunning = false
+    private lastPacketReset = false
     private handlers: Map<TimerEvent, TimerEventHandler[]> = new Map()
 
-    private connected: boolean = false
-    private lastPacketReceived: number = 0
-    private connectionTimout: number = 1000
+    private connected = false
+    private lastPacketReceived = 0
+    private connectionTimout = 1000
 
     constructor() {
         setInterval(() => {
             if (this.connected && this.lastPacketReceived + this.connectionTimout < Date.now()) {
                 this.connected = false
-                this.fire('timerDisconnected')
+                this.fire('timerDisconnected', this.lastPacket || new PacketInvalid())
             } else if (!this.connected && this.lastPacketReceived + this.connectionTimout > Date.now()) {
                 this.connected = true
-                this.fire('timerConnected')
+                this.fire('timerConnected', this.lastPacket || new PacketInvalid())
             }
         }, 100, this)
     }
@@ -104,9 +104,9 @@ export class TimerEventManager {
         this.lastPacket = packet
     }
 
-    private fire(event: TimerEvent, packet?: Packet): void {
+    private fire(event: TimerEvent, packet: Packet): void {
         for (const handler of this.handlers.get(event) || []) {
-            handler(packet!) // TODO: rewrite to not require a packet for every call or create separate event listener type for dis/connect? just send lastPacket?
+            handler(packet)
         }
     }
 }

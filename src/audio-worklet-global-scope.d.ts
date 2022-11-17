@@ -7,7 +7,7 @@ interface AudioWorkletProcessor {
     ): boolean
 }
 
-declare var AudioWorkletProcessor: {
+declare let AudioWorkletProcessor: {
     prototype: AudioWorkletProcessor
     new(options?: AudioWorkletNodeOptions): AudioWorkletProcessor
 }
@@ -17,6 +17,6 @@ declare function registerProcessor(
     processorCtor: (new (options?: AudioWorkletNodeOptions) => AudioWorkletProcessor)
 ): undefined
 
-declare var currentFrame: number
-declare var currentTime: number
-declare var sampleRate: number
+declare let currentFrame: number
+declare let currentTime: number
+declare let sampleRate: number
