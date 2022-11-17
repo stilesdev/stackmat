@@ -108,7 +108,6 @@ function getPacket(data: Bit[]): Packet {
 function decodeBits(data: Bit[], offset: number): number {
     let result = 0
     for (let i = 0; i < 8; i++) {
-        // tslint:disable-next-line:no-bitwise
         result += data[offset + i] << i
     }
     return result

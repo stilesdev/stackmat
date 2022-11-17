@@ -24,7 +24,7 @@
     "build:ts": "tsc",
     "build:umd": "rollup -c",
     "build:umd:min": "rollup -c --environment BUILD:minify",
-    "lint": "tslint -p tsconfig.json",
+    "lint": "eslint ./src",
     "prepack": "npm run build",
     "watch": "concurrently npm:watch:ts npm:watch:umd",
     "watch:ts": "tsc --watch",
@@ -33,9 +33,11 @@
   "devDependencies": {
     "@rollup/plugin-terser": "^0.1.0",
     "@rollup/plugin-typescript": "^9.0.2",
+    "@stilesdev/eslint-config-compat": "^0.3.0",
+    "@stilesdev/eslint-config-typescript": "^0.3.0",
     "concurrently": "^7.5.0",
+    "eslint": "^8.27.0",
     "rollup": "^2.79.1",
-    "tslint": "^6.1.3",
     "typescript": "^4.8.4"
   }
 }
