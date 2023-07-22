@@ -50,7 +50,3 @@ import EventTile from './components/EventTile.vue'
         </footer>
     </main>
 </template>
-
-<style>
-@import './assets/base.css';
-</style>
