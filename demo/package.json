@@ -7,7 +7,12 @@
     "build:pages": "vue-tsc --noEmit && vite build --mode pages",
     "preview": "vite preview --port 5050",
     "typecheck": "vue-tsc --noEmit",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
+    "lint": "npm run lint:eslint && npm run lint:stylelint",
+    "lint:fix": "npm run lint:eslint:fix && npm run lint:stylelint:fix",
+    "lint:eslint": "eslint --ext \".ts,.js,.vue\" --ignore-path .gitignore ./src",
+    "lint:eslint:fix": "eslint --ext \".ts,.js,.vue\" --ignore-path .gitignore --fix ./src",
+    "lint:stylelint": "stylelint --ignore-path .gitignore \"src/**/*.(css|vue)\"",
+    "lint:stylelint:fix": "stylelint --ignore-path .gitignore --fix \"src/**/*.(css|vue)\""
   },
   "dependencies": {
     "@picocss/pico": "^1.5.10",
@@ -15,18 +20,21 @@
     "vue": "^3.3.4"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.3.2",
+    "@stilesdev/eslint-config-vue": "^0.5.5",
+    "@stilesdev/stylelint-config-vue": "^0.5.5",
     "@tsconfig/node18": "^18.2.0",
     "@types/node": "^18.16.20",
     "@vitejs/plugin-vue": "^4.2.3",
-    "@vue/eslint-config-prettier": "^8.0.0",
-    "@vue/eslint-config-typescript": "^11.0.3",
     "@vue/tsconfig": "^0.4.0",
     "eslint": "^8.45.0",
-    "eslint-plugin-vue": "^9.15.1",
-    "prettier": "^3.0.0",
+    "stylelint": "^14.16.1",
     "typescript": "~5.1.6",
     "vite": "^4.4.6",
     "vue-tsc": "^1.8.6"
+  },
+  "overrides": {
+    "stylelint-config-recommended-vue": {
+      "stylelint-config-recommended": "^9.0.0"
+    }
   }
 }
