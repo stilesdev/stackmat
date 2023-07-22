@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import IconGithub from './icons/IconGithub.vue'
-import IconNpm from './icons/IconNpm.vue'
+    import IconGithub from './icons/IconGithub.vue'
+    import IconNpm from './icons/IconNpm.vue'
 </script>
 
 <template>
@@ -10,10 +10,10 @@ import IconNpm from './icons/IconNpm.vue'
         </ul>
         <ul>
             <li>
-                <a href="https://www.npmjs.com/package/stackmat" target="_blank"><IconNpm /></a>
+                <a href="https://www.npmjs.com/package/stackmat" target="_blank" rel="noopener noreferrer"><IconNpm /></a>
             </li>
             <li>
-                <a href="https://github.com/stilesdev/stackmat" target="_blank"><IconGithub /></a>
+                <a href="https://github.com/stilesdev/stackmat" target="_blank" rel="noopener noreferrer"><IconGithub /></a>
             </li>
         </ul>
     </nav>
@@ -28,11 +28,11 @@ import IconNpm from './icons/IconNpm.vue'
 </template>
 
 <style scoped>
-li > strong {
-    font-size: 1.5em;
-}
+    li > strong {
+        font-size: 1.5em;
+    }
 
-p {
-    font-size: 0.8em;
-}
+    p {
+        font-size: 0.8em;
+    }
 </style>
