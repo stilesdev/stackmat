@@ -46,9 +46,11 @@ export abstract class PacketAbstract implements Packet {
     }
 
     get timeAsString(): string {
-        return this.stringDigits.slice(0, 1)
-            + ':' + this.stringDigits.slice(1, 3).join('')
-            + '.' + this.stringDigits.slice(3).join('')
+        const minutes = this.stringDigits.slice(0, 1).join('')
+        const seconds = this.stringDigits.slice(1, 3).join('')
+        const millis = this.stringDigits.slice(3).join('')
+
+        return `${minutes}:${seconds}.${millis}`
     }
 
     get isLeftHandDown(): boolean {
@@ -65,7 +67,7 @@ export abstract class PacketAbstract implements Packet {
 }
 
 export class PacketInvalid extends PacketAbstract {
-    constructor() { 
+    constructor() {
         super(false)
     }
 }

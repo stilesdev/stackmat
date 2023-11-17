@@ -7,7 +7,7 @@ export class TimerEventManager {
     private lastPacket?: Packet
     private lastPacketRunning = false
     private lastPacketReset = false
-    private handlers: Map<TimerEvent, TimerEventHandler[]> = new Map()
+    private handlers = new Map<TimerEvent, TimerEventHandler[]>()
 
     private connected = false
     private lastPacketReceived = 0

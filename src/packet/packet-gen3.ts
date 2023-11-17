@@ -21,7 +21,7 @@ export class PacketGen3 extends PacketAbstract implements Packet {
 
             const minutes = Number(stringDigits[0])
             const seconds = Number(stringDigits.slice(1, 3).join(''))
-            const thousandths = Number(stringDigits.slice(3).join('') + '0')
+            const thousandths = Number(`${stringDigits.slice(3).join('')}0`)
             const timeInMilliseconds = (minutes * 60000) + (seconds * 1000) + thousandths
 
             super(true, status, stringDigits, timeInMilliseconds)

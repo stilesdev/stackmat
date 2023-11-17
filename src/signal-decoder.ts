@@ -70,6 +70,7 @@ export class SignalDecoder {
 
     private getBitsFromRunLengthEncodedSignal(array: RunLength[]): Bit[] {
         const x = array.map((e) => Array(Math.round(e.length / this.ticksPerBit)).fill(e.bit))
+
         return ([] as Bit[]).concat(...x)
     }
 }
@@ -80,7 +81,7 @@ function runLengthEncode(data: Bit[]): RunLength[] {
 
     for (const bit of data) {
         if (lastBit !== bit) {
-            result.push({bit, length: 1})
+            result.push({ bit, length: 1 })
             lastBit = bit
         } else {
             result[result.length - 1].length++
@@ -101,6 +102,7 @@ function getPacket(data: Bit[]): Packet {
         return packet
     } else {
         packet = new PacketGen3(tmp.slice(0, -1))
+
         return packet
     }
 }
@@ -110,5 +112,6 @@ function decodeBits(data: Bit[], offset: number): number {
     for (let i = 0; i < 8; i++) {
         result += data[offset + i] << i
     }
+
     return result
 }

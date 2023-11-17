@@ -28,7 +28,7 @@ export class AudioProcessor {
 
                 this.context.audioWorklet.addModule(stackmatWorkletProcessor).then(() => {
                     if (this.context && this.source) {
-                        this.workletNode = new AudioWorkletNode(this.context, 'stackmat-processor', {numberOfInputs: 1, numberOfOutputs: 1})
+                        this.workletNode = new AudioWorkletNode(this.context, 'stackmat-processor', { numberOfInputs: 1, numberOfOutputs: 1 })
                         this.workletNode.port.onmessage = (event: MessageEvent) => {
                             signalDecoder.decode(event.data)
                         }
