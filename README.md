@@ -2,14 +2,20 @@
 
 Subscribe to events received from a Stackmat timer connected to the browser via the HTML5 Audio API.
 
-Both a Typescript-based library and a UMD build are available.
+Both an ESM library and a UMD build are available.
 
 
-## Typescript Usage ##
+## ESM Usage ##
 
 Install the library:
 
 `npm install stackmat`
+
+Or load in a script tag:
+
+```html
+<script type="module" src="https://unpkg.com/stackmat/dist/stackmat.js"></script>
+```
 
 Subscribe to events and start listening for packets:
 
@@ -30,7 +36,7 @@ stackmat.start()
 ```
 
 
-## Browser Usage ##
+## UMD Usage ##
 
 Import the UMD build:
 
