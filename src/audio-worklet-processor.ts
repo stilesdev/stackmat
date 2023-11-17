@@ -1,9 +1,9 @@
 // Unlike ScriptProcessorNode, AudioWorkletNode doesn't have a bufferSize property
 // so it has to be implemented manually.
 
-export const stackmatWorkletProcessor = URL.createObjectURL(new Blob([ '(', function() {
+export const stackmatWorkletProcessor = URL.createObjectURL(new Blob(['(', function() {
     class StackmatWorkletProcessor extends AudioWorkletProcessor {
-        // This buffer size is small enough to still send a packet every ~230ms, 
+        // This buffer size is small enough to still send a packet every ~230ms,
         // while not cutting off data and producing invalid packets.
         private readonly bufferSize = 10240
         private chunkBuffer
@@ -33,4 +33,4 @@ export const stackmatWorkletProcessor = URL.createObjectURL(new Blob([ '(', func
         }
     }
     registerProcessor('stackmat-processor', StackmatWorkletProcessor)
-}.toString(), ')()' ], { type: 'application/javascript' }))
+}.toString(), ')()'], { type: 'application/javascript' }))

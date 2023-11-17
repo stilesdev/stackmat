@@ -10,6 +10,7 @@ export default class Stackmat {
     public on(event: TimerEvent, callback: TimerEventHandler): boolean {
         if (isEvent(event)) {
             this.eventManager.on(event, callback)
+
             return true
         } else {
             return false
@@ -21,6 +22,7 @@ export default class Stackmat {
             return false
         } else {
             this.eventManager.off(event)
+
             return true
         }
     }

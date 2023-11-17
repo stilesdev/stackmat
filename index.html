@@ -1,54 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Stackmat Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
+
 <body>
     <p id="status">Not Connected</p>
     <p>Last Packet Status: <span id="timerstatus"></span></p>
     <p>Last Packet Milliseconds: <span id="timermillis">0</span></p>
     <p>Last Packet Time: <span id="timer">00:00:00</span></p>
-    <button id="toggle" onclick="toggle()">Start</button>
-    <script src="../dist/stackmat.umd.cjs"></script>
-    <script>
+    <button id="toggle">Start</button>
+    <script type="module">
+        import { Stackmat } from './src/index.ts'
         let capturing = false
         const stackmat = new Stackmat()
 
-        stackmat.on('packetReceived', function(packet) {
+        stackmat.on('packetReceived', function (packet) {
             document.getElementById('timerstatus').innerText = packet.status
             document.getElementById('timermillis').innerText = packet.timeInMilliseconds
             document.getElementById('timer').innerText = packet.timeAsString
         })
 
-        stackmat.on('timerConnected', function() {
+        stackmat.on('timerConnected', function () {
             document.getElementById('status').innerText = 'Connected'
             console.log('Timer Connected')
         })
 
-        stackmat.on('timerDisconnected', function() {
+        stackmat.on('timerDisconnected', function () {
             document.getElementById('status').innerText = 'Not Connected'
             document.getElementById('timerstatus').innerText = ''
             console.log('Timer Disconnected')
         })
 
-        stackmat.on('leftHandDown', function() {
+        stackmat.on('leftHandDown', function () {
             console.log('Left Hand Down')
         })
 
-        stackmat.on('leftHandUp', function() {
+        stackmat.on('leftHandUp', function () {
             console.log('Left Hand Up')
         })
 
-        stackmat.on('rightHandDown', function() {
+        stackmat.on('rightHandDown', function () {
             console.log('Right Hand Down')
         })
 
-        stackmat.on('rightHandUp', function() {
+        stackmat.on('rightHandUp', function () {
             console.log('Right Hand Up')
         })
 
-        stackmat.on('ready', function() {
+        stackmat.on('ready', function () {
             console.log('Ready')
         })
 
@@ -60,15 +63,15 @@
             console.log('Starting')
         })
 
-        stackmat.on('started', function() {
+        stackmat.on('started', function () {
             console.log('Started')
         })
 
-        stackmat.on('stopped', function(packet) {
+        stackmat.on('stopped', function (packet) {
             console.log('Stopped: ' + packet.timeAsString)
         })
 
-        stackmat.on('reset', function() {
+        stackmat.on('reset', function () {
             console.log('Reset')
         })
 
@@ -83,6 +86,9 @@
                 stackmat.stop()
             }
         }
+
+        document.querySelector('#toggle').addEventListener('click', toggle)
     </script>
 </body>
+
 </html>
